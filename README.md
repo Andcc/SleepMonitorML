@@ -1,4 +1,4 @@
-This repository holds the files related to the kaggle competition https://www.kaggle.com/competitions/child-mind-institute-detect-sleep-states/data
+This repository holds the files related to the kaggle competition https://www.kaggle.com/competitions/child-mind-institute-detect-sleep-states/. If you'd like to replicate this work, you must setup the Kaggle api and then, in /data/raw/ type the following command: kaggle competitions download -c child-mind-institute-detect-sleep-states
 
 # Sleep Onset and Wake Detection using Wrist-Worn Accelerometer Data
 
