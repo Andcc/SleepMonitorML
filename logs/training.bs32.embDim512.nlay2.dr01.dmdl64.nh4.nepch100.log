@@ -1,0 +1,418 @@
+2024-01-23 15:14:13,448 INFO GPUs found: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+2024-01-23 15:14:13,448 INFO GPUs set up.
+Defining model...
+2024-01-23 15:14:13,775 INFO Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 150, 2)]             0         []                            
+                                                                                                  
+ conv1d (Conv1D)             (None, 150, 64)              448       ['input_1[0][0]']             
+                                                                                                  
+ conv1d_1 (Conv1D)           (None, 150, 128)             24704     ['conv1d[0][0]']              
+                                                                                                  
+ position_embedding (Positi  (None, 150, 128)             19200     ['conv1d_1[0][0]']            
+ onEmbedding)                                                                                     
+                                                                                                  
+ tf.__operators__.add (TFOp  (None, 150, 128)             0         ['conv1d_1[0][0]',            
+ Lambda)                                                             'position_embedding[0][0]']  
+                                                                                                  
+ transformer_block (Transfo  (None, 150, 128)             330240    ['tf.__operators__.add[0][0]']
+ rmerBlock)                                                                                       
+                                                                                                  
+ transformer_block_1 (Trans  (None, 150, 128)             330240    ['transformer_block[0][0]']   
+ formerBlock)                                                                                     
+                                                                                                  
+ time_distributed (TimeDist  (None, 150, 3)               387       ['transformer_block_1[0][0]'] 
+ ributed)                                                                                         
+                                                                                                  
+==================================================================================================
+Total params: 705219 (2.69 MB)
+Trainable params: 705219 (2.69 MB)
+Non-trainable params: 0 (0.00 Byte)
+__________________________________________________________________________________________________
+2024-01-23 15:14:13,777 INFO Model defined.
+None)
+2024-01-23 15:14:13,960 INFO Loading data for series 207eded97727 with 5400 observations
+2024-01-23 15:14:13,960 INFO Batch 0: X Shape (5400, 150, 2), Y Shape (5400, 150)
+2024-01-23 15:14:51,605 INFO Training finished. Loss: 0.04362201690673828, Accuracy: 0.5279171466827393
+2024-01-23 15:14:51,812 INFO Loading data for series 29d3469bd15d with 4500 observations
+2024-01-23 15:14:51,812 INFO Batch 1: X Shape (4500, 150, 2), Y Shape (4500, 150)
+2024-01-23 15:15:21,064 INFO Training finished. Loss: 0.043096479028463364, Accuracy: 0.5356093049049377
+2024-01-23 15:15:21,300 INFO Loading data for series 292a75c0b94e with 6900 observations
+2024-01-23 15:15:21,300 INFO Batch 2: X Shape (6900, 150, 2), Y Shape (6900, 150)
+2024-01-23 15:16:05,969 INFO Training finished. Loss: 0.04213428497314453, Accuracy: 0.5466653108596802
+2024-01-23 15:16:06,247 INFO Loading data for series bfe41e96d12f with 6600 observations
+2024-01-23 15:16:06,247 INFO Batch 3: X Shape (6600, 150, 2), Y Shape (6600, 150)
+2024-01-23 15:16:49,090 INFO Training finished. Loss: 0.040551476180553436, Accuracy: 0.5714337229728699
+2024-01-23 15:16:49,298 INFO Loading data for series 51c49c540b4e with 4800 observations
+2024-01-23 15:16:49,299 INFO Batch 4: X Shape (4800, 150, 2), Y Shape (4800, 150)
+2024-01-23 15:17:20,905 INFO Training finished. Loss: 0.04003153741359711, Accuracy: 0.5786970853805542
+2024-01-23 15:17:21,130 INFO Loading data for series 785c9ca4eff7 with 5100 observations
+2024-01-23 15:17:21,131 INFO Batch 5: X Shape (5100, 150, 2), Y Shape (5100, 150)
+2024-01-23 15:17:54,292 INFO Training finished. Loss: 0.04022850841283798, Accuracy: 0.5894690752029419
+2024-01-23 15:17:54,676 INFO Loading data for series 3318a0e3ed6f with 9600 observations
+2024-01-23 15:17:54,677 INFO Batch 6: X Shape (9600, 150, 2), Y Shape (9600, 150)
+2024-01-23 15:18:56,810 INFO Training finished. Loss: 0.03786439076066017, Accuracy: 0.6004127860069275
+2024-01-23 15:18:57,042 INFO Loading data for series 971207c6a525 with 5100 observations
+2024-01-23 15:18:57,043 INFO Batch 7: X Shape (5100, 150, 2), Y Shape (5100, 150)
+2024-01-23 15:19:38,023 INFO Training finished. Loss: 0.03583283722400665, Accuracy: 0.6121901869773865
+2024-01-23 15:19:38,411 INFO Loading data for series c38707ef76df with 9000 observations
+2024-01-23 15:19:38,411 INFO Batch 8: X Shape (9000, 150, 2), Y Shape (9000, 150)
+2024-01-23 15:20:36,344 INFO Training finished. Loss: 0.03598753362894058, Accuracy: 0.630038321018219
+2024-01-23 15:20:36,538 INFO Loading data for series d515236bdeec with 4200 observations
+2024-01-23 15:20:36,540 INFO Batch 9: X Shape (4200, 150, 2), Y Shape (4200, 150)
+2024-01-23 15:21:03,934 INFO Training finished. Loss: 0.03106646239757538, Accuracy: 0.6390088200569153
+2024-01-23 15:21:04,128 INFO Loading data for series 9b9cd7b7af8c with 5400 observations
+2024-01-23 15:21:04,129 INFO Batch 10: X Shape (5400, 150, 2), Y Shape (5400, 150)
+2024-01-23 15:21:39,007 INFO Training finished. Loss: 0.03636423125863075, Accuracy: 0.6428556442260742
+2024-01-23 15:21:39,243 INFO Loading data for series def21f50dd3c with 5700 observations
+2024-01-23 15:21:39,243 INFO Batch 11: X Shape (5700, 150, 2), Y Shape (5700, 150)
+2024-01-23 15:22:16,279 INFO Training finished. Loss: 0.0364195853471756, Accuracy: 0.6457138657569885
+2024-01-23 15:22:16,473 INFO Loading data for series a261bc4b7470 with 3600 observations
+2024-01-23 15:22:16,473 INFO Batch 12: X Shape (3600, 150, 2), Y Shape (3600, 150)
+2024-01-23 15:22:40,094 INFO Training finished. Loss: 0.0334671251475811, Accuracy: 0.6489943265914917
+2024-01-23 15:22:40,313 INFO Loading data for series 4ab54be1a403 with 6900 observations
+2024-01-23 15:22:40,313 INFO Batch 13: X Shape (6900, 150, 2), Y Shape (6900, 150)
+2024-01-23 15:23:24,844 INFO Training finished. Loss: 0.03627387806773186, Accuracy: 0.6528785824775696
+2024-01-23 15:23:25,179 INFO Loading data for series 416354edd92a with 8400 observations
+2024-01-23 15:23:25,180 INFO Batch 14: X Shape (8400, 150, 2), Y Shape (8400, 150)
+2024-01-23 15:24:19,667 INFO Training finished. Loss: 0.02958630584180355, Accuracy: 0.6642134785652161
+2024-01-23 15:24:19,768 INFO Loading data for series 73fb772e50fb with 1500 observations
+2024-01-23 15:24:19,769 INFO Batch 15: X Shape (1500, 150, 2), Y Shape (1500, 150)
+2024-01-23 15:24:29,731 INFO Training finished. Loss: 0.027125293388962746, Accuracy: 0.6671878695487976
+2024-01-23 15:24:30,076 INFO Loading data for series 25e2b3dd9c3b with 10200 observations
+2024-01-23 15:24:30,076 INFO Batch 16: X Shape (10200, 150, 2), Y Shape (10200, 150)
+2024-01-23 15:25:36,070 INFO Training finished. Loss: 0.033169686794281006, Accuracy: 0.6739059090614319
+2024-01-23 15:25:36,375 INFO Loading data for series b364205aba43 with 6900 observations
+2024-01-23 15:25:36,376 INFO Batch 17: X Shape (6900, 150, 2), Y Shape (6900, 150)
+2024-01-23 15:26:20,929 INFO Training finished. Loss: 0.031723253428936005, Accuracy: 0.6808053255081177
+2024-01-23 15:26:20,990 INFO Loading data for series a2b0a64ec9cf with 300 observations
+2024-01-23 15:26:20,991 INFO Batch 18: X Shape (300, 150, 2), Y Shape (300, 150)
+2024-01-23 15:26:23,189 INFO Training finished. Loss: 0.027666844427585602, Accuracy: 0.6813087463378906
+2024-01-23 15:26:23,517 INFO Loading data for series e8d0a37c3eba with 9600 observations
+2024-01-23 15:26:23,517 INFO Batch 19: X Shape (9600, 150, 2), Y Shape (9600, 150)
+2024-01-23 15:27:25,414 INFO Training finished. Loss: 0.03585876524448395, Accuracy: 0.6816264986991882
+2024-01-23 15:27:25,456 INFO Loading data for series 854206f602d0 with 900 observations
+2024-01-23 15:27:25,457 INFO Batch 20: X Shape (900, 150, 2), Y Shape (900, 150)
+2024-01-23 15:27:31,538 INFO Training finished. Loss: 0.03867903724312782, Accuracy: 0.6815208196640015
+2024-01-23 15:27:31,701 INFO Loading data for series ee4e0e3afd3d with 4500 observations
+2024-01-23 15:27:31,701 INFO Batch 21: X Shape (4500, 150, 2), Y Shape (4500, 150)
+2024-01-23 15:28:00,789 INFO Training finished. Loss: 0.034321755170822144, Accuracy: 0.6821562647819519
+2024-01-23 15:28:00,903 INFO Loading data for series 8f6f15b9f598 with 3300 observations
+2024-01-23 15:28:00,903 INFO Batch 22: X Shape (3300, 150, 2), Y Shape (3300, 150)
+2024-01-23 15:28:22,474 INFO Training finished. Loss: 0.034567609429359436, Accuracy: 0.6829109787940979
+2024-01-23 15:28:22,699 INFO Loading data for series 844f54dcab89 with 6300 observations
+2024-01-23 15:28:22,700 INFO Batch 23: X Shape (6300, 150, 2), Y Shape (6300, 150)
+2024-01-23 15:29:03,732 INFO Training finished. Loss: 0.03671436011791229, Accuracy: 0.6843944787979126
+2024-01-23 15:29:03,969 INFO Loading data for series 9fbdeffbe2ba with 5400 observations
+2024-01-23 15:29:03,970 INFO Batch 24: X Shape (5400, 150, 2), Y Shape (5400, 150)
+2024-01-23 15:29:38,912 INFO Training finished. Loss: 0.034589748829603195, Accuracy: 0.6861612796783447
+2024-01-23 15:29:39,174 INFO Loading data for series ccdee561ee5d with 6300 observations
+2024-01-23 15:29:39,175 INFO Batch 25: X Shape (6300, 150, 2), Y Shape (6300, 150)
+2024-01-23 15:30:19,923 INFO Training finished. Loss: 0.030186979100108147, Accuracy: 0.6907773613929749
+2024-01-23 15:30:20,096 INFO Loading data for series f56824b503a0 with 3600 observations
+2024-01-23 15:30:20,096 INFO Batch 26: X Shape (3600, 150, 2), Y Shape (3600, 150)
+2024-01-23 15:30:43,423 INFO Training finished. Loss: 0.029089152812957764, Accuracy: 0.6930065751075745
+2024-01-23 15:30:43,657 INFO Loading data for series 99237ce045e4 with 6900 observations
+2024-01-23 15:30:43,658 INFO Batch 27: X Shape (6900, 150, 2), Y Shape (6900, 150)
+2024-01-23 15:31:28,240 INFO Training finished. Loss: 0.032155439257621765, Accuracy: 0.6954169869422913
+2024-01-23 15:31:28,484 INFO Loading data for series c908a0ad3e31 with 4800 observations
+2024-01-23 15:31:28,485 INFO Batch 28: X Shape (4800, 150, 2), Y Shape (4800, 150)
+2024-01-23 15:31:59,537 INFO Training finished. Loss: 0.035537537187337875, Accuracy: 0.6974099278450012
+2024-01-23 15:31:59,605 INFO Loading data for series f981a0805fd0 with 600 observations
+2024-01-23 15:31:59,605 INFO Batch 29: X Shape (600, 150, 2), Y Shape (600, 150)
+2024-01-23 15:32:03,822 INFO Training finished. Loss: 0.020077921450138092, Accuracy: 0.6981134414672852
+2024-01-23 15:32:04,042 INFO Loading data for series 7df249527c63 with 6300 observations
+2024-01-23 15:32:04,042 INFO Batch 30: X Shape (6300, 150, 2), Y Shape (6300, 150)
+2024-01-23 15:32:44,760 INFO Training finished. Loss: 0.03298430144786835, Accuracy: 0.699425458908081
+2024-01-23 15:32:44,843 INFO Loading data for series 519ae2d858b0 with 2100 observations
+2024-01-23 15:32:44,844 INFO Batch 31: X Shape (2100, 150, 2), Y Shape (2100, 150)
+2024-01-23 15:32:58,668 INFO Training finished. Loss: 0.03810519352555275, Accuracy: 0.6998689770698547
+2024-01-23 15:32:58,965 INFO Loading data for series af91d9a50547 with 7200 observations
+2024-01-23 15:32:58,965 INFO Batch 32: X Shape (7200, 150, 2), Y Shape (7200, 150)
+2024-01-23 15:33:45,906 INFO Training finished. Loss: 0.03128925338387489, Accuracy: 0.7022209763526917
+2024-01-23 15:33:46,107 INFO Loading data for series e2a849d283c0 with 4500 observations
+2024-01-23 15:33:46,107 INFO Batch 33: X Shape (4500, 150, 2), Y Shape (4500, 150)
+2024-01-23 15:34:15,177 INFO Training finished. Loss: 0.03359703719615936, Accuracy: 0.7037229537963867
+2024-01-23 15:34:15,390 INFO Loading data for series 0ef7d94fde99 with 6300 observations
+2024-01-23 15:34:15,390 INFO Batch 34: X Shape (6300, 150, 2), Y Shape (6300, 150)
+2024-01-23 15:34:56,080 INFO Training finished. Loss: 0.03012968972325325, Accuracy: 0.7061077952384949
+2024-01-23 15:34:56,313 INFO Loading data for series 7504165f497d with 6600 observations
+2024-01-23 15:34:56,313 INFO Batch 35: X Shape (6600, 150, 2), Y Shape (6600, 150)
+2024-01-23 15:35:38,939 INFO Training finished. Loss: 0.03181717172265053, Accuracy: 0.7079806923866272
+2024-01-23 15:35:39,218 INFO Loading data for series c75b4b207bea with 6900 observations
+2024-01-23 15:35:39,219 INFO Batch 36: X Shape (6900, 150, 2), Y Shape (6900, 150)
+2024-01-23 15:36:23,806 INFO Training finished. Loss: 0.02717907540500164, Accuracy: 0.7116409540176392
+2024-01-23 15:36:24,045 INFO Loading data for series ebd76e93ec7d with 5700 observations
+2024-01-23 15:36:24,046 INFO Batch 37: X Shape (5700, 150, 2), Y Shape (5700, 150)
+2024-01-23 15:37:00,860 INFO Training finished. Loss: 0.026572875678539276, Accuracy: 0.7144825458526611
+2024-01-23 15:37:01,117 INFO Loading data for series fbf33b1a2c10 with 6000 observations
+2024-01-23 15:37:01,118 INFO Batch 38: X Shape (6000, 150, 2), Y Shape (6000, 150)
+2024-01-23 15:37:40,068 INFO Training finished. Loss: 0.0344608798623085, Accuracy: 0.7147513031959534
+2024-01-23 15:37:40,450 INFO Loading data for series bf00506437aa with 8700 observations
+2024-01-23 15:37:40,451 INFO Batch 39: X Shape (8700, 150, 2), Y Shape (8700, 150)
+2024-01-23 15:38:36,833 INFO Training finished. Loss: 0.02670285291969776, Accuracy: 0.71871018409729
+2024-01-23 15:38:37,058 INFO Loading data for series 5f40907ec171 with 5100 observations
+2024-01-23 15:38:37,059 INFO Batch 40: X Shape (5100, 150, 2), Y Shape (5100, 150)
+2024-01-23 15:39:09,960 INFO Training finished. Loss: 0.030410727486014366, Accuracy: 0.7202977538108826
+2024-01-23 15:39:10,234 INFO Loading data for series 8e32047cbc1f with 6900 observations
+2024-01-23 15:39:10,235 INFO Batch 41: X Shape (6900, 150, 2), Y Shape (6900, 150)
+2024-01-23 15:39:54,826 INFO Training finished. Loss: 0.03325110301375389, Accuracy: 0.7208965420722961
+2024-01-23 15:39:55,005 INFO Loading data for series 35826366dfc7 with 3900 observations
+2024-01-23 15:39:55,006 INFO Batch 42: X Shape (3900, 150, 2), Y Shape (3900, 150)
+2024-01-23 15:40:20,437 INFO Training finished. Loss: 0.0325213186442852, Accuracy: 0.721244215965271
+2024-01-23 15:40:20,665 INFO Loading data for series 2fbbee1a38e3 with 6300 observations
+2024-01-23 15:40:20,665 INFO Batch 43: X Shape (6300, 150, 2), Y Shape (6300, 150)
+2024-01-23 15:41:01,364 INFO Training finished. Loss: 0.02785305120050907, Accuracy: 0.7235444188117981
+2024-01-23 15:41:01,428 INFO Loading data for series c5365a55ebb7 with 300 observations
+2024-01-23 15:41:01,429 INFO Batch 44: X Shape (300, 150, 2), Y Shape (300, 150)
+2024-01-23 15:41:03,444 INFO Training finished. Loss: 0.02977626770734787, Accuracy: 0.7238864302635193
+2024-01-23 15:41:03,768 INFO Loading data for series 3452b878e596 with 9300 observations
+2024-01-23 15:41:03,768 INFO Batch 45: X Shape (9300, 150, 2), Y Shape (9300, 150)
+2024-01-23 15:42:04,111 INFO Training finished. Loss: 0.029776424169540405, Accuracy: 0.7253422141075134
+2024-01-23 15:42:04,383 INFO Loading data for series 1762ab70ec76 with 5700 observations
+2024-01-23 15:42:04,383 INFO Batch 46: X Shape (5700, 150, 2), Y Shape (5700, 150)
+2024-01-23 15:42:41,231 INFO Training finished. Loss: 0.027691617608070374, Accuracy: 0.7280237674713135
+2024-01-23 15:42:41,512 INFO Loading data for series df33ae359fb5 with 6900 observations
+2024-01-23 15:42:41,512 INFO Batch 47: X Shape (6900, 150, 2), Y Shape (6900, 150)
+2024-01-23 15:43:26,072 INFO Training finished. Loss: 0.03066776879131794, Accuracy: 0.7287090420722961
+2024-01-23 15:43:26,183 INFO Loading data for series ba8083a2c3b8 with 1500 observations
+2024-01-23 15:43:26,184 INFO Batch 48: X Shape (1500, 150, 2), Y Shape (1500, 150)
+2024-01-23 15:43:35,915 INFO Training finished. Loss: 0.028023473918437958, Accuracy: 0.7293017506599426
+2024-01-23 15:43:36,136 INFO Loading data for series 72ba4a8afff4 with 4800 observations
+2024-01-23 15:43:36,137 INFO Batch 49: X Shape (4800, 150, 2), Y Shape (4800, 150)
+2024-01-23 15:44:07,165 INFO Training finished. Loss: 0.026444407179951668, Accuracy: 0.7305399179458618
+2024-01-23 15:44:07,356 INFO Loading data for series 702bb5387b1e with 4200 observations
+2024-01-23 15:44:07,356 INFO Batch 50: X Shape (4200, 150, 2), Y Shape (4200, 150)
+2024-01-23 15:44:34,542 INFO Training finished. Loss: 0.020556289702653885, Accuracy: 0.7325489521026611
+2024-01-23 15:44:34,616 INFO Loading data for series 1c7c0bad1263 with 1800 observations
+2024-01-23 15:44:34,616 INFO Batch 51: X Shape (1800, 150, 2), Y Shape (1800, 150)
+2024-01-23 15:44:46,470 INFO Training finished. Loss: 0.03296757489442825, Accuracy: 0.7329603433609009
+2024-01-23 15:44:46,752 INFO Loading data for series d93b0c7de16b with 6600 observations
+2024-01-23 15:44:46,753 INFO Batch 52: X Shape (6600, 150, 2), Y Shape (6600, 150)
+2024-01-23 15:45:29,343 INFO Training finished. Loss: 0.0315292663872242, Accuracy: 0.7341601848602295
+2024-01-23 15:45:29,595 INFO Loading data for series 9c91c546e095 with 5700 observations
+2024-01-23 15:45:29,595 INFO Batch 53: X Shape (5700, 150, 2), Y Shape (5700, 150)
+2024-01-23 15:46:06,500 INFO Training finished. Loss: 0.02191580832004547, Accuracy: 0.7372675538063049
+2024-01-23 15:46:06,901 INFO Loading data for series e586cbfa7762 with 10200 observations
+2024-01-23 15:46:06,901 INFO Batch 54: X Shape (10200, 150, 2), Y Shape (10200, 150)
+2024-01-23 15:47:12,680 INFO Training finished. Loss: 0.028775066137313843, Accuracy: 0.7406891584396362
+2024-01-23 15:47:12,818 INFO Loading data for series 8898e6db816d with 2400 observations
+2024-01-23 15:47:12,819 INFO Batch 55: X Shape (2400, 150, 2), Y Shape (2400, 150)
+2024-01-23 15:47:28,570 INFO Training finished. Loss: 0.024134578183293343, Accuracy: 0.7418020963668823
+2024-01-23 15:47:28,884 INFO Loading data for series 9a340507e36a with 7800 observations
+2024-01-23 15:47:28,884 INFO Batch 56: X Shape (7800, 150, 2), Y Shape (7800, 150)
+2024-01-23 15:48:19,539 INFO Training finished. Loss: 0.028261667117476463, Accuracy: 0.7439941167831421
+2024-01-23 15:48:19,826 INFO Loading data for series 6ee4ade1f2bd with 6900 observations
+2024-01-23 15:48:19,826 INFO Batch 57: X Shape (6900, 150, 2), Y Shape (6900, 150)
+2024-01-23 15:49:04,357 INFO Training finished. Loss: 0.020922482013702393, Accuracy: 0.746685802936554
+2024-01-23 15:49:04,618 INFO Loading data for series 0f572d690310 with 6000 observations
+2024-01-23 15:49:04,619 INFO Batch 58: X Shape (6000, 150, 2), Y Shape (6000, 150)
+2024-01-23 15:49:43,339 INFO Training finished. Loss: 0.027181735262274742, Accuracy: 0.7486023306846619
+2024-01-23 15:49:43,537 INFO Loading data for series d3dddd3c0e00 with 4500 observations
+2024-01-23 15:49:43,538 INFO Batch 59: X Shape (4500, 150, 2), Y Shape (4500, 150)
+2024-01-23 15:50:12,593 INFO Training finished. Loss: 0.029191942885518074, Accuracy: 0.7498891353607178
+2024-01-23 15:50:12,834 INFO Loading data for series e1f5abb82285 with 7200 observations
+2024-01-23 15:50:12,835 INFO Batch 60: X Shape (7200, 150, 2), Y Shape (7200, 150)
+2024-01-23 15:50:59,315 INFO Training finished. Loss: 0.02272718772292137, Accuracy: 0.7522478699684143
+2024-01-23 15:50:59,583 INFO Loading data for series 752900afe3a6 with 6300 observations
+2024-01-23 15:50:59,583 INFO Batch 61: X Shape (6300, 150, 2), Y Shape (6300, 150)
+2024-01-23 15:51:40,292 INFO Training finished. Loss: 0.021746788173913956, Accuracy: 0.7543907165527344
+2024-01-23 15:51:40,591 INFO Loading data for series 55b7f5c99930 with 6600 observations
+2024-01-23 15:51:40,591 INFO Batch 62: X Shape (6600, 150, 2), Y Shape (6600, 150)
+2024-01-23 15:52:23,181 INFO Training finished. Loss: 0.02537989802658558, Accuracy: 0.7563738226890564
+2024-01-23 15:52:23,277 INFO Loading data for series 9277be28a1cf with 1200 observations
+2024-01-23 15:52:23,277 INFO Batch 63: X Shape (1200, 150, 2), Y Shape (1200, 150)
+2024-01-23 15:52:31,644 INFO Training finished. Loss: 0.02304350771009922, Accuracy: 0.7570450901985168
+2024-01-23 15:52:31,749 INFO Loading data for series a167532acca2 with 2700 observations
+2024-01-23 15:52:31,749 INFO Batch 64: X Shape (2700, 150, 2), Y Shape (2700, 150)
+2024-01-23 15:52:49,558 INFO Training finished. Loss: 0.02065417729318142, Accuracy: 0.7579579949378967
+2024-01-23 15:52:49,710 INFO Loading data for series 77ca4db83644 with 4200 observations
+2024-01-23 15:52:49,710 INFO Batch 65: X Shape (4200, 150, 2), Y Shape (4200, 150)
+2024-01-23 15:53:16,890 INFO Training finished. Loss: 0.025020236149430275, Accuracy: 0.7592051029205322
+2024-01-23 15:53:17,117 INFO Loading data for series 40dce6018935 with 6300 observations
+2024-01-23 15:53:17,117 INFO Batch 66: X Shape (6300, 150, 2), Y Shape (6300, 150)
+2024-01-23 15:53:57,840 INFO Training finished. Loss: 0.023543385788798332, Accuracy: 0.7609153389930725
+2024-01-23 15:53:57,918 INFO Loading data for series 349c5562ee2c with 600 observations
+2024-01-23 15:53:57,918 INFO Batch 67: X Shape (600, 150, 2), Y Shape (600, 150)
+2024-01-23 15:54:01,902 INFO Training finished. Loss: 0.023616911843419075, Accuracy: 0.7612133026123047
+2024-01-23 15:54:02,066 INFO Loading data for series d2d6b9af0553 with 4500 observations
+2024-01-23 15:54:02,067 INFO Batch 68: X Shape (4500, 150, 2), Y Shape (4500, 150)
+2024-01-23 15:54:31,142 INFO Training finished. Loss: 0.02898281440138817, Accuracy: 0.7614471316337585
+2024-01-23 15:54:31,428 INFO Loading data for series d5e47b94477e with 6900 observations
+2024-01-23 15:54:31,428 INFO Batch 69: X Shape (6900, 150, 2), Y Shape (6900, 150)
+2024-01-23 15:55:15,957 INFO Training finished. Loss: 0.02578437700867653, Accuracy: 0.7629199624061584
+2024-01-23 15:55:16,331 INFO Loading data for series e0686434d029 with 9600 observations
+2024-01-23 15:55:16,332 INFO Batch 70: X Shape (9600, 150, 2), Y Shape (9600, 150)
+2024-01-23 15:56:18,310 INFO Training finished. Loss: 0.025643862783908844, Accuracy: 0.7651381492614746
+2024-01-23 15:56:18,421 INFO Loading data for series fb223ed2278c with 1500 observations
+2024-01-23 15:56:18,422 INFO Batch 71: X Shape (1500, 150, 2), Y Shape (1500, 150)
+2024-01-23 15:56:28,136 INFO Training finished. Loss: 0.024314656853675842, Accuracy: 0.7655574679374695
+2024-01-23 15:56:28,454 INFO Loading data for series 1087d7b0ff2e with 7200 observations
+2024-01-23 15:56:28,454 INFO Batch 72: X Shape (7200, 150, 2), Y Shape (7200, 150)
+2024-01-23 15:57:14,954 INFO Training finished. Loss: 0.029121562838554382, Accuracy: 0.7664164900779724
+2024-01-23 15:57:15,317 INFO Loading data for series 653622ac8363 with 9600 observations
+2024-01-23 15:57:15,317 INFO Batch 73: X Shape (9600, 150, 2), Y Shape (9600, 150)
+2024-01-23 15:58:17,277 INFO Training finished. Loss: 0.023975228890776634, Accuracy: 0.7692353129386902
+2024-01-23 15:58:17,504 INFO Loading data for series 2f7504d0f426 with 5400 observations
+2024-01-23 15:58:17,505 INFO Batch 74: X Shape (5400, 150, 2), Y Shape (5400, 150)
+2024-01-23 15:58:52,377 INFO Training finished. Loss: 0.023197105154395103, Accuracy: 0.7707977294921875
+2024-01-23 15:58:52,463 INFO Loading data for series 405df1b41f9f with 900 observations
+2024-01-23 15:58:52,463 INFO Batch 75: X Shape (900, 150, 2), Y Shape (900, 150)
+2024-01-23 15:58:58,320 INFO Training finished. Loss: 0.02185172215104103, Accuracy: 0.7711902260780334
+2024-01-23 15:58:58,683 INFO Loading data for series de6fedfb6139 with 9600 observations
+2024-01-23 15:58:58,684 INFO Batch 76: X Shape (9600, 150, 2), Y Shape (9600, 150)
+2024-01-23 16:00:00,624 INFO Training finished. Loss: 0.0263417586684227, Accuracy: 0.7719001770019531
+2024-01-23 16:00:00,912 INFO Loading data for series 804594bb1f06 with 6900 observations
+2024-01-23 16:00:00,912 INFO Batch 77: X Shape (6900, 150, 2), Y Shape (6900, 150)
+2024-01-23 16:01:22,853 INFO Training finished. Loss: 0.020265230908989906, Accuracy: 0.7742370963096619
+2024-01-23 16:01:23,093 INFO Loading data for series 038441c925bb with 5700 observations
+2024-01-23 16:01:23,093 INFO Batch 78: X Shape (5700, 150, 2), Y Shape (5700, 150)
+2024-01-23 16:01:58,576 INFO Training finished. Loss: 0.025735171511769295, Accuracy: 0.7756327986717224
+2024-01-23 16:01:58,771 INFO Loading data for series 87a6cbb7c4ed with 3900 observations
+2024-01-23 16:01:58,772 INFO Batch 79: X Shape (3900, 150, 2), Y Shape (3900, 150)
+2024-01-23 16:02:39,746 INFO Training finished. Loss: 0.022038280963897705, Accuracy: 0.7765576243400574
+2024-01-23 16:02:40,097 INFO Loading data for series 18b61dd5aae8 with 8700 observations
+2024-01-23 16:02:40,097 INFO Batch 80: X Shape (8700, 150, 2), Y Shape (8700, 150)
+2024-01-23 16:03:35,703 INFO Training finished. Loss: 0.019023045897483826, Accuracy: 0.7791832685470581
+2024-01-23 16:03:35,967 INFO Loading data for series 04f547b8017d with 6300 observations
+2024-01-23 16:03:35,967 INFO Batch 81: X Shape (6300, 150, 2), Y Shape (6300, 150)
+2024-01-23 16:04:16,727 INFO Training finished. Loss: 0.02239999733865261, Accuracy: 0.7808964848518372
+2024-01-23 16:04:16,997 INFO Loading data for series 27f09a6a858f with 6300 observations
+2024-01-23 16:04:16,997 INFO Batch 82: X Shape (6300, 150, 2), Y Shape (6300, 150)
+2024-01-23 16:04:57,729 INFO Training finished. Loss: 0.025862179696559906, Accuracy: 0.7822924256324768
+2024-01-23 16:04:57,956 INFO Loading data for series 6a4cd123bd69 with 5100 observations
+2024-01-23 16:04:57,957 INFO Batch 83: X Shape (5100, 150, 2), Y Shape (5100, 150)
+2024-01-23 16:05:30,916 INFO Training finished. Loss: 0.021904051303863525, Accuracy: 0.783642590045929
+2024-01-23 16:05:31,127 INFO Loading data for series 0a96f4993bd7 with 4500 observations
+2024-01-23 16:05:31,128 INFO Batch 84: X Shape (4500, 150, 2), Y Shape (4500, 150)
+2024-01-23 16:06:00,236 INFO Training finished. Loss: 0.02779085375368595, Accuracy: 0.7841571569442749
+2024-01-23 16:06:00,476 INFO Loading data for series bccf2f2819f8 with 6000 observations
+2024-01-23 16:06:00,477 INFO Batch 85: X Shape (6000, 150, 2), Y Shape (6000, 150)
+2024-01-23 16:06:39,236 INFO Training finished. Loss: 0.023047398775815964, Accuracy: 0.7851195931434631
+2024-01-23 16:06:39,494 INFO Loading data for series ece2561f07e9 with 6000 observations
+2024-01-23 16:06:39,495 INFO Batch 86: X Shape (6000, 150, 2), Y Shape (6000, 150)
+2024-01-23 16:07:18,224 INFO Training finished. Loss: 0.02630675584077835, Accuracy: 0.7862463593482971
+2024-01-23 16:07:18,300 INFO Loading data for series 7476c0bd18d2 with 600 observations
+2024-01-23 16:07:18,300 INFO Batch 87: X Shape (600, 150, 2), Y Shape (600, 150)
+2024-01-23 16:07:22,290 INFO Training finished. Loss: 0.023174963891506195, Accuracy: 0.7864688634872437
+2024-01-23 16:07:22,619 INFO Loading data for series dc80ca623d71 with 8400 observations
+2024-01-23 16:07:22,620 INFO Batch 88: X Shape (8400, 150, 2), Y Shape (8400, 150)
+2024-01-23 16:08:16,822 INFO Training finished. Loss: 0.021125854924321175, Accuracy: 0.788170576095581
+2024-01-23 16:08:17,065 INFO Loading data for series 3665c86afaf5 with 5400 observations
+2024-01-23 16:08:17,066 INFO Batch 89: X Shape (5400, 150, 2), Y Shape (5400, 150)
+2024-01-23 16:08:51,934 INFO Training finished. Loss: 0.026234770193696022, Accuracy: 0.7890720367431641
+2024-01-23 16:08:52,080 INFO Loading data for series 2654a87be968 with 2400 observations
+2024-01-23 16:08:52,081 INFO Batch 90: X Shape (2400, 150, 2), Y Shape (2400, 150)
+2024-01-23 16:09:07,620 INFO Training finished. Loss: 0.02316214144229889, Accuracy: 0.7896021008491516
+2024-01-23 16:09:07,997 INFO Loading data for series a9a2f7fac455 with 10500 observations
+2024-01-23 16:09:07,997 INFO Batch 91: X Shape (10500, 150, 2), Y Shape (10500, 150)
+2024-01-23 16:10:15,941 INFO Training finished. Loss: 0.027141110971570015, Accuracy: 0.7907835841178894
+2024-01-23 16:10:16,029 INFO Loading data for series b7fc34995d0f with 900 observations
+2024-01-23 16:10:16,030 INFO Batch 92: X Shape (900, 150, 2), Y Shape (900, 150)
+2024-01-23 16:10:21,897 INFO Training finished. Loss: 0.023881645873188972, Accuracy: 0.790868878364563
+2024-01-23 16:10:22,121 INFO Loading data for series 0cfc06c129cc with 6300 observations
+2024-01-23 16:10:22,122 INFO Batch 93: X Shape (6300, 150, 2), Y Shape (6300, 150)
+2024-01-23 16:11:02,801 INFO Training finished. Loss: 0.027474578469991684, Accuracy: 0.7918131947517395
+2024-01-23 16:11:03,150 INFO Loading data for series 51b23d177971 with 8700 observations
+2024-01-23 16:11:03,150 INFO Batch 94: X Shape (8700, 150, 2), Y Shape (8700, 150)
+2024-01-23 16:11:59,248 INFO Training finished. Loss: 0.02811013162136078, Accuracy: 0.7931126952171326
+2024-01-23 16:11:59,427 INFO Loading data for series 612aa8ba44e2 with 3600 observations
+2024-01-23 16:11:59,428 INFO Batch 95: X Shape (3600, 150, 2), Y Shape (3600, 150)
+2024-01-23 16:12:22,756 INFO Training finished. Loss: 0.024872036650776863, Accuracy: 0.7939415574073792
+2024-01-23 16:12:22,844 INFO Loading data for series c3072a759efb with 2550 observations
+2024-01-23 16:12:22,844 INFO Batch 96: X Shape (2550, 150, 2), Y Shape (2550, 150)
+2024-01-23 16:12:39,572 INFO Training finished. Loss: 0.024089960381388664, Accuracy: 0.7943360209465027
+2024-01-23 16:12:39,807 INFO Loading data for series c68260cc9e8f with 5400 observations
+2024-01-23 16:12:39,807 INFO Batch 97: X Shape (5400, 150, 2), Y Shape (5400, 150)
+2024-01-23 16:13:14,718 INFO Training finished. Loss: 0.032621853053569794, Accuracy: 0.7943839430809021
+2024-01-23 16:13:14,923 INFO Loading data for series 1f96b9668bdf with 4500 observations
+2024-01-23 16:13:14,923 INFO Batch 98: X Shape (4500, 150, 2), Y Shape (4500, 150)
+2024-01-23 16:13:44,010 INFO Training finished. Loss: 0.02593712881207466, Accuracy: 0.7948086261749268
+2024-01-23 16:13:44,253 INFO Loading data for series 5f94bb3e1bed with 6900 observations
+2024-01-23 16:13:44,253 INFO Batch 99: X Shape (6900, 150, 2), Y Shape (6900, 150)
+2024-01-23 16:14:28,845 INFO Training finished. Loss: 0.02308163233101368, Accuracy: 0.7959286570549011
+2024-01-23 16:14:28,923 INFO Loading data for series 60e51cad2ffb with 900 observations
+2024-01-23 16:14:28,923 INFO Batch 100: X Shape (900, 150, 2), Y Shape (900, 150)
+2024-01-23 16:14:34,792 INFO Training finished. Loss: 0.02346721664071083, Accuracy: 0.7959257960319519
+2024-01-23 16:14:34,933 INFO Loading data for series c8053490cec2 with 3900 observations
+2024-01-23 16:14:34,933 INFO Batch 101: X Shape (3900, 150, 2), Y Shape (3900, 150)
+2024-01-23 16:15:00,131 INFO Training finished. Loss: 0.024415675550699234, Accuracy: 0.7961891293525696
+2024-01-23 16:15:00,191 INFO Loading data for series cf13ed7e457a with 300 observations
+2024-01-23 16:15:00,192 INFO Batch 102: X Shape (300, 150, 2), Y Shape (300, 150)
+2024-01-23 16:15:02,207 INFO Training finished. Loss: 0.015875162556767464, Accuracy: 0.7963087558746338
+2024-01-23 16:15:02,309 INFO Loading data for series cfeb11428dd7 with 2700 observations
+2024-01-23 16:15:02,310 INFO Batch 103: X Shape (2700, 150, 2), Y Shape (2700, 150)
+2024-01-23 16:15:19,857 INFO Training finished. Loss: 0.023339493200182915, Accuracy: 0.796699583530426
+2024-01-23 16:15:20,063 INFO Loading data for series 4feda0596965 with 4500 observations
+2024-01-23 16:15:20,064 INFO Batch 104: X Shape (4500, 150, 2), Y Shape (4500, 150)
+2024-01-23 16:15:49,188 INFO Training finished. Loss: 0.03147168830037117, Accuracy: 0.7962033748626709
+2024-01-23 16:15:49,436 INFO Loading data for series 91127c2b0e60 with 5700 observations
+2024-01-23 16:15:49,437 INFO Batch 105: X Shape (5700, 150, 2), Y Shape (5700, 150)
+2024-01-23 16:16:30,416 INFO Training finished. Loss: 0.023607680574059486, Accuracy: 0.7970646023750305
+2024-01-23 16:16:30,680 INFO Loading data for series bfa54bd26187 with 6300 observations
+2024-01-23 16:16:30,681 INFO Batch 106: X Shape (6300, 150, 2), Y Shape (6300, 150)
+2024-01-23 16:17:11,315 INFO Training finished. Loss: 0.027610832825303078, Accuracy: 0.7979257106781006
+2024-01-23 16:17:11,448 INFO Loading data for series c535634d7dcd with 2400 observations
+2024-01-23 16:17:11,449 INFO Batch 107: X Shape (2400, 150, 2), Y Shape (2400, 150)
+2024-01-23 16:17:27,021 INFO Training finished. Loss: 0.03094531036913395, Accuracy: 0.7979398369789124
+2024-01-23 16:17:27,372 INFO Loading data for series 72d2234e84e4 with 9000 observations
+2024-01-23 16:17:27,373 INFO Batch 108: X Shape (9000, 150, 2), Y Shape (9000, 150)
+2024-01-23 16:18:25,530 INFO Training finished. Loss: 0.023754427209496498, Accuracy: 0.7987344861030579
+2024-01-23 16:18:25,755 INFO Loading data for series dff367373725 with 5100 observations
+2024-01-23 16:18:25,756 INFO Batch 109: X Shape (5100, 150, 2), Y Shape (5100, 150)
+2024-01-23 16:18:58,662 INFO Training finished. Loss: 0.025515077635645866, Accuracy: 0.7995884418487549
+2024-01-23 16:18:58,801 INFO Loading data for series 03d92c9f6f8a with 2400 observations
+2024-01-23 16:18:58,802 INFO Batch 110: X Shape (2400, 150, 2), Y Shape (2400, 150)
+2024-01-23 16:19:14,366 INFO Training finished. Loss: 0.021239954978227615, Accuracy: 0.8000607490539551
+2024-01-23 16:19:14,603 INFO Loading data for series 0402a003dae9 with 5400 observations
+2024-01-23 16:19:14,603 INFO Batch 111: X Shape (5400, 150, 2), Y Shape (5400, 150)
+2024-01-23 16:19:49,514 INFO Training finished. Loss: 0.02185315638780594, Accuracy: 0.8006749749183655
+2024-01-23 16:19:49,641 INFO Loading data for series b84960841a75 with 2100 observations
+2024-01-23 16:19:49,641 INFO Batch 112: X Shape (2100, 150, 2), Y Shape (2100, 150)
+2024-01-23 16:20:03,309 INFO Training finished. Loss: 0.02569388598203659, Accuracy: 0.8009044528007507
+2024-01-23 16:20:03,568 INFO Loading data for series 449766346eb1 with 6600 observations
+2024-01-23 16:20:03,568 INFO Batch 113: X Shape (6600, 150, 2), Y Shape (6600, 150)
+2024-01-23 16:20:46,186 INFO Training finished. Loss: 0.019308792427182198, Accuracy: 0.8020681738853455
+2024-01-23 16:20:46,284 INFO Loading data for series 703b5efa9bc1 with 1500 observations
+2024-01-23 16:20:46,284 INFO Batch 114: X Shape (1500, 150, 2), Y Shape (1500, 150)
+2024-01-23 16:20:55,998 INFO Training finished. Loss: 0.0166398324072361, Accuracy: 0.8024628162384033
+2024-01-23 16:20:56,184 INFO Loading data for series 8becc76ea607 with 3900 observations
+2024-01-23 16:20:56,184 INFO Batch 115: X Shape (3900, 150, 2), Y Shape (3900, 150)
+2024-01-23 16:21:21,428 INFO Training finished. Loss: 0.020813537761569023, Accuracy: 0.802874743938446
+2024-01-23 16:21:21,514 INFO Loading data for series 10469f6765bf with 900 observations
+2024-01-23 16:21:21,515 INFO Batch 116: X Shape (900, 150, 2), Y Shape (900, 150)
+2024-01-23 16:21:27,390 INFO Training finished. Loss: 0.024946529418230057, Accuracy: 0.8029261231422424
+2024-01-23 16:21:27,523 INFO Loading data for series 60d31b0bec3b with 3600 observations
+2024-01-23 16:21:27,523 INFO Batch 117: X Shape (3600, 150, 2), Y Shape (3600, 150)
+2024-01-23 16:21:50,872 INFO Training finished. Loss: 0.031141696497797966, Accuracy: 0.802529513835907
+2024-01-23 16:21:51,213 INFO Loading data for series 1319a1935f48 with 9900 observations
+2024-01-23 16:21:51,214 INFO Batch 118: X Shape (9900, 150, 2), Y Shape (9900, 150)
+2024-01-23 16:22:55,716 INFO Training finished. Loss: 0.02420654147863388, Accuracy: 0.8030378222465515
+2024-01-23 16:22:55,803 INFO Loading data for series 5e816f11f5c3 with 900 observations
+2024-01-23 16:22:55,804 INFO Batch 119: X Shape (900, 150, 2), Y Shape (900, 150)
+2024-01-23 16:23:01,673 INFO Training finished. Loss: 0.02269383706152439, Accuracy: 0.8032337427139282
+2024-01-23 16:23:01,982 INFO Loading data for series 3aceb17ef7bd with 9000 observations
+2024-01-23 16:23:01,983 INFO Batch 120: X Shape (9000, 150, 2), Y Shape (9000, 150)
+2024-01-23 16:24:00,102 INFO Training finished. Loss: 0.019766993820667267, Accuracy: 0.8045425415039062
+2024-01-23 16:24:00,495 INFO Loading data for series 8a22387617c3 with 8700 observations
+2024-01-23 16:24:00,496 INFO Batch 121: X Shape (8700, 150, 2), Y Shape (8700, 150)
+2024-01-23 16:24:56,599 INFO Training finished. Loss: 0.028804244473576546, Accuracy: 0.8054633140563965
+2024-01-23 16:24:56,845 INFO Loading data for series 7fd4284b7ee8 with 5700 observations
+2024-01-23 16:24:56,846 INFO Batch 122: X Shape (5700, 150, 2), Y Shape (5700, 150)
+2024-01-23 16:25:33,707 INFO Training finished. Loss: 0.01917031966149807, Accuracy: 0.8063580393791199
+2024-01-23 16:25:33,913 INFO Loading data for series 6bf95a3cf91c with 4500 observations
+2024-01-23 16:25:33,913 INFO Batch 123: X Shape (4500, 150, 2), Y Shape (4500, 150)
+2024-01-23 16:26:02,991 INFO Training finished. Loss: 0.018929583951830864, Accuracy: 0.8068626523017883
+2024-01-23 16:26:03,328 INFO Loading data for series fe90110788d2 with 9900 observations
+2024-01-23 16:26:03,329 INFO Batch 124: X Shape (9900, 150, 2), Y Shape (9900, 150)
+2024-01-23 16:27:07,186 INFO Training finished. Loss: 0.022708836942911148, Accuracy: 0.807925820350647
+2024-01-23 16:27:07,359 INFO Loading data for series 31011ade7c0a with 3300 observations
+2024-01-23 16:27:07,361 INFO Batch 125: X Shape (3300, 150, 2), Y Shape (3300, 150)
+2024-01-23 16:27:28,721 INFO Training finished. Loss: 0.021224109455943108, Accuracy: 0.8084983825683594
+2024-01-23 16:27:28,978 INFO Loading data for series f2c2436cf7b7 with 6000 observations
+2024-01-23 16:27:28,978 INFO Batch 126: X Shape (6000, 150, 2), Y Shape (6000, 150)
+2024-01-23 16:28:07,767 INFO Training finished. Loss: 0.01894061639904976, Accuracy: 0.8092396259307861
+2024-01-23 16:28:07,902 INFO Loading data for series 8b8b9e29171c with 2700 observations
+2024-01-23 16:28:07,903 INFO Batch 127: X Shape (2700, 150, 2), Y Shape (2700, 150)
