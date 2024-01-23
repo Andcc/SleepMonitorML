@@ -18,7 +18,6 @@ DATASET_ALLOCATIONS = '../data/processed/transformer_data/allocation_records.jso
 
 NUM_CLASSES = 3
 
-
 WINDOW_SIZE = 150
 INPUT_DIMS = 2
 EMBED_DIM = 512
@@ -179,46 +178,8 @@ def main():
     tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir='./logs')
     train_model(model, 'train', limit_train=False)
 
-
-def main2():
-    model = create_transformer_model()
-
-    # Log the model summary
-    try:
-        model_summary = []
-        model.summary(print_fn=lambda x: model_summary.append(x))
-        log.info("\n".join(model_summary))
-    except Exception as e:
-        log.error(f'Error printing model summary: {e}')
-        raise e
-    log.info('Model defined.')
-
-    # Establish log directory for tensorboard
-    if not os.path.exists('./logs'):
-        os.makedirs('./logs')
-    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir='./logs')
-
-    # Begin training
-    log.info('Begin training...')
-    limit_train = False # parameter to reduce training complexity: testing purposes
-    for i, (batch_x, batch_y, batch_events) in enumerate(load_batched_data('train')):
-        batch_y = one_hot_encode_labels(batch_y)
-        log.info(
-            f"Batch {i}: X Shape {batch_x.shape}, Y Shape {batch_y.shape}")
-
-        if not limit_train or (limit_train and i < 1000):
-            try:
-                history = model.fit(batch_x, batch_y, batch_size=BATCH_SIZE,
-                                    epochs=NUM_EPOCHS, verbose=1#, callbacks=[tensorboard_callback, tf.keras.callbacks.LearningRateScheduler(lr_scheduler)]
-                                    )
-                log.info(
-                    f'Training finished. Loss: {history.history["loss"][-1]}, Accuracy: {history.history["custom_auc"][-1]}')
-            except Exception as e:
-                log.error(f'Error training model: {e}')
-                break
-        else:
-            break
-
+    # Save the model
+    model.save(os.path.join(MODEL_DIR, 'ConvFormer.v1.h5'))
 
 # Main
 if __name__ == '__main__':
