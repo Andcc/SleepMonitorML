@@ -10,8 +10,13 @@ from keras.layers import Input, Dense, Dropout, LayerNormalization, MultiHeadAtt
 from keras_nlp.layers import TransformerEncoder, PositionEmbedding
 from keras.optimizers import Adam
 from keras.initializers import RandomUniform
+from keras.regularizers import l1_l2
+
 
 # Constants
+MODEL_NAME = 'ConvFormer.v3' # v2:add Dropout layers ; 2.2 add l1_l2, LR sched, and early stop. ; 3.0 revert to 1:0
+LOG_NAME = f'../logs/training.{MODEL_NAME}.log'
+
 DATA_DIR = '../data/processed/checkpoint/'
 MODEL_DIR = '../data/models/'
 DATASET_ALLOCATIONS = '../data/processed/transformer_data/allocation_records.json'
@@ -28,17 +33,18 @@ D_MODEL = 64
 DFF = 256
 
 N_FILTERS = 64
-POOL_SIZE =2
 FILTER_SIZE = 3
 
-NUM_EPOCHS = 10
-BATCH_SIZE = 64*8
-DROPOUT_RATE = 0.1
+NUM_EPOCHS = 10 #1.0:10 ; 1.1:15 ; 2.0:15 ; 
+BATCH_SIZE = 32*16 #1.0:512 ; 1.1:128 ; 2.0:128 ; 2::512 ;
+DROPOUT_RATE = 0.1 #1.0:0.1 ; 1.1:0.5 ; 2.0:0.5 ; 
 
+AUC = tf.keras.metrics.AUC(multi_label=True, num_labels=3,
+                           label_weights=[.0001, .4995, .4995], name='my_AUC')
 
 # Logging
 log.basicConfig(level=log.DEBUG,
-                format='%(asctime)s %(levelname)s %(message)s', filename='../logs/training.bs32.embDim512.nlay2.dr01.dmdl64.nh4.nepch100.log')
+                format='%(asctime)s %(levelname)s %(message)s', filename=LOG_NAME)
 
 # Set GPUs
 def setup_gpus():
@@ -56,22 +62,33 @@ def load_series(series_id):
         return np.load(os.path.join(DATA_DIR, series_id + '.npy'))
     except Exception as e:
         log.error(f'Error loading series {series_id}: {e}')
+        
+def augment_data(x, noise_level=0.01):
+    noise = np.random.normal(0, noise_level, x.shape)
+    return x + noise
 
-def load_batched_data(dataset_id):
+def load_all_data(dataset_id):
     with open(DATASET_ALLOCATIONS, 'r') as f:
         allocations = json.load(f)
         series_ids = allocations[dataset_id]
+
+        all_x, all_y, all_events = [], [], []
         for series_id in series_ids:
-            data = np.load(os.path.join(
-                DATA_DIR, series_id + '.npz'), allow_pickle=True)
+            data = np.load(os.path.join(DATA_DIR, series_id + '.npz'), allow_pickle=True)
             x, y, events = data['sequences'], data['labels'], data['events']
+            x = augment_data(x)
+            all_x.append(x)
+            all_y.append(y)
+            all_events.append(events)
 
             log.info(f'Loading data for series {series_id} with {len(x)} observations')
-            # TESTING 
-            yield x, y, events
-            ##############################
-            #for i in range(0, len(x), BATCH_SIZE):
-            #    yield x[i:i+BATCH_SIZE], y[i:i+BATCH_SIZE], events[i:i+BATCH_SIZE]
+
+        # Concatenate all data
+        all_x = np.concatenate(all_x, axis=0)
+        all_y = np.concatenate(all_y, axis=0)
+        all_events = np.concatenate(all_events, axis=0)
+
+        return all_x, all_y, all_events
 
 def one_hot_encode_labels(labels):
     # Convert labels to one-hot encoding
@@ -109,15 +126,14 @@ def lr_scheduler(epoch, lr):
         return lr * 0.9
     return lr
 
-auc = tf.keras.metrics.AUC(multi_label=True, num_labels=3,
-                           label_weights=[.0001, .4995, .4995], name='my_AUC')
+early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_custom_auc', patience=3, mode='max', restore_best_weights=True)
+lr_schedule = tf.keras.callbacks.LearningRateScheduler(lr_scheduler)
 
 def custom_auc(y_true, y_pred):
     # Flatten the last two dimensions
     y_true_reshaped = tf.reshape(y_true, [-1, 3])
     y_pred_reshaped = tf.reshape(y_pred, [-1, 3])
-
-    return auc(y_true_reshaped, y_pred_reshaped)
+    return AUC(y_true_reshaped, y_pred_reshaped)
 
 
 # Model definition
@@ -125,7 +141,9 @@ def create_transformer_model(input_shape=(WINDOW_SIZE, INPUT_DIMS), training=Tru
     inputs = Input(shape=input_shape)
 
     x = keras.layers.Conv1D(filters=N_FILTERS, kernel_size=FILTER_SIZE, activation='relu', padding='same')(inputs)
-    x = keras.layers.Conv1D(filters=N_FILTERS*2, kernel_size=FILTER_SIZE, activation='relu', padding='same')(x)
+    x = keras.layers.BatchNormalization()(x)
+    x = keras.layers.Conv1D(filters=N_FILTERS*2, kernel_size=FILTER_SIZE, activation='relu', padding='same')(x) # 2.2 REMOVED THIS LAYER
+    x = keras.layers.BatchNormalization()(x)
 
     positional_embedding_layer = PositionEmbedding(
         input_dim=N_FILTERS*2, sequence_length=WINDOW_SIZE)
@@ -139,21 +157,29 @@ def create_transformer_model(input_shape=(WINDOW_SIZE, INPUT_DIMS), training=Tru
     outputs = keras.layers.TimeDistributed(Dense(NUM_CLASSES, activation='softmax'))(x)
     
     model = Model(inputs=inputs, outputs=outputs)
-    model.compile(optimizer=Adam(learning_rate=1e-4),
+    model.compile(optimizer=Adam(learning_rate=5e-5),
                   loss='categorical_crossentropy', metrics=[custom_auc])
     return model
 
 
 # Training Function
-def train_model(model, dataset_id, limit_train=False):
-    for i, (batch_x, batch_y, _) in enumerate(load_batched_data(dataset_id)):
-        log.info(f"Batch {i}: X Shape {batch_x.shape}, Y Shape {batch_y.shape}")
-        batch_y = one_hot_encode_labels(batch_y)
-        if not limit_train or (limit_train and i < 1000):
-            history = model.fit(batch_x, batch_y, batch_size=BATCH_SIZE, epochs=NUM_EPOCHS, verbose=1)
-            log.info(
-                    f'Training finished. Loss: {history.history["loss"][-1]}, Accuracy: {history.history["custom_auc"][-1]}')
+class CustomLogger(tf.keras.callbacks.Callback):
+    def on_epoch_end(self, epoch, logs=None):
+        logs = logs or {}
+        log.info(f"Epoch {epoch + 1}: Loss: {logs.get('loss')}, Custom AUC: {logs.get('custom_auc')}")
 
+def train_model(model, dataset_id, batch_size=BATCH_SIZE):
+    all_x, all_y, _ = load_all_data(dataset_id)
+    all_y = one_hot_encode_labels(all_y)
+    log.info(f"X Shape {all_x.shape}, Y Shape {all_y.shape}")
+
+    custom_logger = CustomLogger()
+    history = model.fit(all_x, all_y, batch_size=batch_size, epochs=NUM_EPOCHS, verbose=1, callbacks=[custom_logger])
+    log.info(f'Training finished. Loss: {history.history["loss"][-1]}, Custom AUC: {history.history["custom_auc"][-1]}')
+
+
+
+# Main
 def main():
     try: 
         setup_gpus()
@@ -172,14 +198,12 @@ def main():
         log.error(f'Error defining model: {e}')
         raise e
         
-    log.info(f'Model defined.\n{model.summary()})')
-    
-
-    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir='./logs')
-    train_model(model, 'train', limit_train=False)
-
+    log.info(f'Model defined.\n{model.summary()}')
+    train_model(model, 'train', BATCH_SIZE)
+    log.info('Model trained')
     # Save the model
-    model.save(os.path.join(MODEL_DIR, 'ConvFormer.v1.h5'))
+    model.save(os.path.join(MODEL_DIR, MODEL_NAME))
+    log.info('Done.')
 
 # Main
 if __name__ == '__main__':
