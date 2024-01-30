@@ -2,15 +2,12 @@ import os, json
 import tensorflow as tf
 import numpy as np
 
+# Constants
 DATA_DIR = '../data/processed/checkpoint/'
 MODEL_DIR = '../data/models/'
 DATASET_ALLOCATIONS = '../data/processed/transformer_data/allocation_records.json' 
 
-
-# Use log.info, log.warning, log.error where needed in your DataLoader methods
-
-
-### DATA LOADER ###
+# Data Loader class
 class DataLoader(tf.keras.utils.Sequence):
     def __init__(self, dataset_id, batch_size=32, shuffle=True, data_dir=DATA_DIR, dataset_allocations=DATASET_ALLOCATIONS, noise_level=0):
         self.data_dir = data_dir
