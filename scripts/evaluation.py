@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(description='Model Evaluation Script')
 parser.add_argument('--f_name', type=str, required=True, help='Filename for the log')
 parser.add_argument('--m_name', type=str, required=True, help='Model name to evaluate')
 parser.add_argument('--dataset', default='dev', type=str, required=False, help='Dataset to evaluate on')
-parser.add_argument('--batch_size', default='dev', type=str, required=False, help='Dataset to evaluate on')
+parser.add_argument('--batch_size', default='dev', type=str, required=False, help='Number of samples per batch')
 args = parser.parse_args()
 
 
@@ -39,7 +39,7 @@ file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
 
-
+# Test function
 def test_model(model, test_data, test_labels):
     logger.info('Testing model...')
     test_loss, test_auc = model.evaluate(test_data, test_labels, verbose=1)
