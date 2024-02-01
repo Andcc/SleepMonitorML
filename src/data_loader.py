@@ -65,3 +65,15 @@ class DataLoader(tf.keras.utils.Sequence):
     def on_epoch_end(self):
         if self.shuffle:
             np.random.shuffle(self.series)
+
+    def get_eval_dataset(self, dataset_id):
+        with open(DATASET_ALLOCATIONS, 'r') as f:
+            allocations = json.load(f)
+            series_ids = allocations[dataset_id]
+            all_x, all_y = [], []
+            for series_id in series_ids:
+                data = np.load(os.path.join(DATA_DIR, series_id + '.npz'), allow_pickle=True)
+                x, y, _ = data['sequences'], data['labels'], data['events']
+                all_x.append(x)
+                all_y.append(y)
+            return np.concatenate(all_x, axis=0), tf.keras.utils.to_categorical(np.concatenate(all_y, axis=0), num_classes=3)
