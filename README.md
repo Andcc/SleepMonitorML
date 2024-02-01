@@ -1,4 +1,4 @@
-This repository holds the files related to the kaggle competition https://www.kaggle.com/competitions/child-mind-institute-detect-sleep-states/data
+This repository holds the files related to the kaggle competition https://www.kaggle.com/competitions/child-mind-institute-detect-sleep-states/. If you'd like to replicate this work, you must setup the Kaggle api and then, in /data/raw/ type the following command: kaggle competitions download -c child-mind-institute-detect-sleep-states
 
 # Sleep Onset and Wake Detection using Wrist-Worn Accelerometer Data
 
@@ -19,23 +19,3 @@ The dataset consists of around 500 multi-day recordings of wrist-worn accelerome
 - No more than one window should be assigned per night.
 - Approximately as many nights are recorded for a series as 24-hour periods.
 - Some series might have times when the device was removed; no event predictions should be made during these times.
-
-## Repository Structure
-
-```plaintext
-.
-├── data/
-│   ├── raw
-│   │	├── train_series.parquet
-│   │	├── train_series.parquet
-│   │	├── test_series.parquet
-│   │	├── train_events.csv
-│   │	└── sample_submission.csv
-│   ├── processed
-├── src/
-│   ├── preprocessing/
-│   ├── modeling/
-│   └── evaluation/
-├── notebooks/
-├── results/
-└── README.md
